@@ -1,0 +1,235 @@
+Numpy Basic Introduction
+Array Creation:
+	10+ ways are
+
+>>> np.ones((2,3))
+array([[1., 1., 1.],
+       [1., 1., 1.]])
+
+>>> np.ones((10))
+array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])
+
+Attributes
+How to access elements of array
+	Basic Indexing
+	Slice Operations
+	Advanced Indexing
+	Condition Based Selection
+
+Ex:
+>>> a = np.arange(1,21)
+>>> a
+>>> a[a%6==0]
+array([ 6, 12, 18])
+
+How to iterate elements of an array:
+	python's normal loops
+	nditer()
+	ndenumerate()
+
+Arithmetic operators
+Broadcasting
+Array Manipulation functions
+	reshape()
+	resize()
+	flatten()
+	ravel()
+	transpose()
+	etc....
+Matrix class
+
+Ex:What is the need of Numpy
+----------------------------------------------
+Boys and Girls are attending Mahesh sir datascience class.
+For boys fee is $3 and for girls fees is $8, For a certain batch 2200 people attended and $10100 fee collected. How many boys and girls attended for that batch.
+
+x --->no of boys
+y --->no of girls
+
+x + y = 2200
+3x + 8y = 10100
+
+coefficient matrix:
+a =	1 1
+		3 8
+value matrix
+	b = [2200,10100]
+
+numpy.linalg.solve(a,b)
+
+>>> import numpy as np
+>>> a = np.array([[1,1],[3,8]])
+>>> a
+array([[1, 1],
+       [3, 8]])
+>>> b = np.array([2200,10100])
+>>> b
+array([ 2200, 10100])
+>>> np.linalg.solve(a,b)
+array([1500.,  700.])
+
+Array:
+--------
+An indexed collection of homogenious data elements.
+
+How to create arrays in python.
+-----------------------------------------------
+Inbuilt arrays concept is not there in python
+
+2-ways:
+-----------
+1. By using array module
+2. By using numpy module
+
+1. By using array module(Not recommended)
+-------------------------------------------------------------------
+import array
+a = array.array('i',[10,20,30])#i represents type:int array
+print(type(a))
+print(a)
+print('Elements one by one:')
+for x in a:
+	print(x)
+
+Note:
+	array module is not recommended because much library support is not available.
+
+2.By using numpy module:
+---------------------------------------
+import numpy
+a = numpy.array([10,20,30])
+print(type(a))
+print(a)
+for x in a:
+	print(x)
+
+Python's List vs Numpy ndarray:
+------------------------------------------------
+1.Similarities:
+---------------------
+-->Both are used to store data.
+-->The order will be preserved in both. Hence indexing and slicing concepts are applicable.
+-->Both are mutable, i.e we can change the content.
+
+2.Differences:
+---------------------
+1.list is pythons inbuilt type. We have to install and import numpy explicitly.
+2.list can contain hetrogenious elements. But array contains only homogenious elements.
+
+import numpy
+l = [10,10.5,'Sunny',True]
+print(l)#[10, 10.5, 'Sunny', True]
+a = numpy.array(l)
+print(a)#['10' '10.5' 'Sunny' 'True']
+
+3.On list we cannot perform vector operations. But on ndarray we can perform vector operations
+
+>>>l = [10,20,30,40]
+>>>import numpy as np
+>>>a = np.array(l)
+>>>a #array([10, 20, 30, 40])
+>>>l + 2 #Invalid
+>>>a + 2 #array([12, 22, 32, 42])
+>>>a / 2 #array([ 5., 10., 15., 20.])
+>>>l * 2 #[10, 20, 30, 40, 10, 20, 30, 40]
+>>>a * 2 #array([20, 40, 60, 80])
+
+4.Arrays consumes less memory than list.
+5.Array are superfast when compared with list.
+6.Numpy arrays are more convinient to use while performing complex mathematical operations.
+
+How to create Numpy Arrays:
+--------------------------------------------
+1.array()
+2.arange()
+3.linspace()
+4.zeros()
+5.ones()
+6.full()
+7.eye()
+8.identity()
+9.empty()
+10.numpy.random
+		1.randint()
+		2.arnd()
+		3.uniform()
+		4.randn()
+		5.normal()
+		6.shuffle()
+
+1.Creation of numpy arrays by using array():
+------------------------------------------------------------------
+For the given list or tuple
+
+>>>import numpy as np
+>>>help(np.array)
+
+1-D array:
+---------------
+>>> l = [10,20,30]
+>>> type(l)#<class 'list'>
+>>> a = np.array(l)
+>>> type(a)#<class 'numpy.ndarray'>
+>>> a #array([10, 20, 30])
+>>> a.ndim #1
+>>> a.dtype #dtype('int32')
+
+Note:
+	a.ndim--->To know dimension of ndarray
+	a.dtype--->To know data type of elements
+
+2-D array creation:
+----------------------------
+[[10,20,30],[40,50,60],[70,80,90]]----->Nested List
+
+>>> a = np.array([[10,20,30],[40,50,60],[70,80,90]])
+>>> type(a) #<class 'numpy.ndarray'>
+>>> a
+>>> a.shape #(3, 3)
+>>> a.ndim #2
+>>> a.size #9
+
+To create 1-D array from the tuple
+---------------------------------------------------
+>>> a = np.array(('sunny','bunny','vinny'))
+>>> a.ndim #1
+>>> a.shape #(3,)
+>>> a.dtype #dtype('<U5')
+
+Note:Array contains only homogenious elements.
+If the list contains hetrogenious elements:Upcasting will be performed.
+
+>>> a = np.array([10,20,10.5])
+>>> a #array([10. , 20. , 10.5]) Upcasting int to float
+>>> a.dtype #dtype('float64')
+
+>>> a = np.array([10,20,'a'])
+>>> a #array(['10', '20', 'a'], dtype='<U11')
+
+How to create a particular type:
+-----------------------------------------------
+We have to use dtype parameter
+
+>>> a = np.array([10,20,30.5],dtype=int)
+>>> a #array([10, 20, 30])
+>>> a = np.array([10,20,30.5],dtype=bool)
+>>> a #array([ True,  True,  True])
+>>> a = np.array([10,20,30.5],dtype=float)
+>>> a #array([10. , 20. , 30.5])
+>>> a = np.array([10,20,30.5],dtype=complex)
+>>> a #array([10. +0.j, 20. +0.j, 30.5+0.j])
+
+>>> a = np.array([10,'Sunny'],dtype=int) #Invalid
+
+How to create object type array:
+------------------------------------------------
+Here any type of elements are allowed.
+
+>>> a = np.array([10,'Sunny',True,10.5,10+3j],dtype=object)
+>>> a #array([10, 'Sunny', True, 10.5, (10+3j)], dtype=object)
+
+If we are not given dtype then
+>>> a = np.array([10,'Sunny',True,10.5,10+3j])
+>>> a #array(['10', 'Sunny', 'True', '10.5', '(10+3j)'], dtype='<U64')
+
+array() ----> To create ndarray from the given list or tupe.
