@@ -1,0 +1,193 @@
+Numpy Data Types:
+-----------------------------
+Python data types:int,float,str,complex,bool etc.......
+
+Numpy data types:Multiple data types present(Python + C)
+
+i===>integer(int8,int16,int32,int64)
+b===>boolean
+u===>unsigned integer(uint8,uint16,uint32,uint64)
+f===>float(float16,float32,float64)
+c===>complex(complex64,complex128)
+s==>String
+U==>Unicode String
+M===>datetime etc.....
+
+int8==>i1; int16==>i2; int32==>i4(default)
+float16==>f2; float32==>f4(default); float64==>f8
+
+int8:
+	-->The value will be represented by 8bits.
+	-->MSB is reserved for sign
+	-->The range:-128 to 127
+
+import sys
+import numpy as np
+a = np.array([10,20,30,40])
+print(sys.getsizeof(a))
+a = np.array([10,20,30,40],dtype='int8')
+print(sys.getsizeof(a))
+
+Changing the data type of an existing array
+----------------------------------------------------------------
+1).astype()
+2).By using built-in function of numpy like float64()
+
+Ex:
+import numpy as np
+a = np.array([10,20,30,40])
+b = a.astype('float64')
+print(a.dtype)#int32
+print(b.dtype)#float64
+
+Ex:
+a = np.array([10,20,30,40])
+b = np.float64(a)
+print(a.dtype)
+print(b.dtype)
+
+Ex:
+a = np.array([10,0,30,0])
+x = np.bool(a)#Invalid
+
+x = np.bool_(a)
+print(x)
+
+How to get/access elements of Numpy Array:
+--------------------------------------------------------------------
+1.Indexing
+2.Slicing
+3.Advanced Indexing
+
+1.Indexing:
+	By using index, we can get single element of the array.
+	zero based indexing. i.e the index of first element is 0
+	supports both +ve and -ve indexing
+
+From 1-D array:
+------------------------
+a[index]
+>>> a = np.array([10,20,30,40])
+>>> a #array([10, 20, 30, 40])
+>>> a[0] #10
+>>> a[-1] #40
+>>> a[10] #IndexError
+
+From 2-D array:
+------------------------
+a[rowindex][columnindex]
+
+>>> a = np.array([[10,20,30],[40,50,60]])
+>>> a
+array([[10, 20, 30],
+       [40, 50, 60]])
+
+To Access 50
+--------------------
+>>> a[1][1]
+>>> a[1][-2]
+>>> a[-1][-2]
+>>> a[-1][1]
+
+From 3-D array:
+------------------------
+(2,3,4)
+	a[i][j][k]:
+		i-->represents which 2-D array(index of 2-D array)
+		j-->represents row index in that 2-D array
+		k-->represents column index in that 2-D array
+
+a[0][1][2]:
+	0-indexed 2-D array
+	In that 2-D array 1 indexed row and 2 indexed column
+
+>>> l = [[[1,2,3],[4,5,6],[7,8,9]],[[10,11,12],[13,14,15],[16,17,18]]]
+>>> a = np.array(l)
+>>> a
+
+To access 14:
+--------------------
+>>> a[1][1][1]
+>>> a[-1][-2][-2]
+>>> a[1][-2][-2]
+>>> a[-1][1][-2]
+
+Accessing elements of ndarray by using slice operator:
+---------------------------------------------------------------------------------
+a[begin:end:step]
+
+1-D array:
+---------------
+>>> a = np.arange(10,101,10)
+>>> a
+>>> a[2:5]
+>>> a[::1]
+>>> a[::-1]
+>>> a[::-2]
+
+2-D array:
+--------------
+a[row,column]
+a[begin:end:step, begin:end:step]
+
+>>> a = np.array([[10,20],[30,40],[50,60]])
+>>> a
+array([[10, 20],
+       [30, 40],
+       [50, 60]])
+
+Access [10, 20]
+-----------------------
+>>> a[0:1,:]
+
+>>> a[0,:]
+array([10, 20])#It is 1-D array
+
+>>> a[0::2,:]
+array([[10, 20],
+       [50, 60]])
+
+>>> a[0:2,1:2]
+array([[20],
+       [40]])
+
+>>> a[:2,1:]
+array([[20],
+       [40]])
+
+Ex:
+-----
+>>> a = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
+>>> a
+array([[ 1,  2,  3,  4],
+       [ 5,  6,  7,  8],
+       [ 9, 10, 11, 12],
+       [13, 14, 15, 16]])
+
+>>> a[0:2,:]
+array([[1, 2, 3, 4],
+       [5, 6, 7, 8]])
+
+>>> a[0::3,:]
+array([[ 1,  2,  3,  4],
+       [13, 14, 15, 16]])
+
+>>> a[:,0:2]
+array([[ 1,  2],
+       [ 5,  6],
+       [ 9, 10],
+       [13, 14]])
+
+>>> a[:,::2]
+array([[ 1,  3],
+       [ 5,  7],
+       [ 9, 11],
+       [13, 15]])
+
+>>> a[1:3,1:3]
+array([[ 6,  7],
+       [10, 11]])
+
+>>> a[::3,::3]
+array([[ 1,  4],
+       [13, 16]])
