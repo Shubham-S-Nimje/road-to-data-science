@@ -1,0 +1,99 @@
+Python for Data Science, ML, DL and AI:
+-----------------------------------------------------------
+Devopps-->Regular core python knowledge
+			concise code
+			Rich libraries--->70 to 90% our libraries 10% we have to write the code.
+
+What is this line in python?
+			import numpy as np
+
+Numpy-->Entry point from  python for DS
+Numpy-->Numerical Python Library
+
+How to install Numpy?
+----------------------------------
+>>>pip install numpy
+
+How to check version:
+---------------------------------
+D:\Mahesh_Classes>py
+>>> import numpy as np
+>>> np.__version__
+
+What is the need of Numpy?
+------------------------------------------
+Python performs basic mathematical operations.
+a = 10
+b = 20
+a+b
+a-b
+a/b
+a*b
+
+math.sqrt(4)
+
+But in Data Science, ML, DL and AI required complex matghematical operations....
+
+1.Numpy defines several functions to perform complex mathematical operations.
+2.To fullfill performance gaps
+	most of the Numpy is implemented in C-Language
+	superfast
+3.nd array(To store large data in nd array for matplotlib graph style)
+	-->n dimensional array or numpy array
+
+Ex:
+	matrix with all zero 10X10 shape
+	l = [[0,0,0,0...],[],[],......[]]
+
+>>>import numpy as np
+>>>a = np.zeros((10,10))
+>>>a
+
+If you want only int type:
+	>>> a = np.zeros((10,10),dtype=int)
+
+list of 100-numbers:
+	>>>a = np.arange(1,101)
+	>>>a
+
+pls convert into 2-dimension array
+>>>a.reshape(10,10)
+
+Identity matrix?
+>>>a = np.identity(3)
+>>>a = np.identity(5)
+
+4.Data Analysis:
+		2 crore samples are analyzed
+		100 -->points
+		new patient--->corona
+
+History of Numpy:
+---------------------------
+Origin of Numpy---->Numeric Library
+Numeric Library--->Jim Hugunin
+Numpy-->Travis Oliphant(2005)
+Open source library and freeware
+
+Q.In which language Numpy was written?
+C and Python
+
+Q.What is nd array in numpy?
+--------------------------------------------
+The fundamental data type to store our data:nd array
+
+>>> a = np.identity(5)
+>>> type(a) #<class 'numpy.ndarray'>
+>>> help(np.ndarray)
+Help on class ndarray in module numpy:
+
+arrays are objects of ndarray class present in numpy module
+
+Array:An indexed collection of homogenious elements
+
+1-D array	--->Vector
+2-D array	--->Matrix
+.
+.
+.
+n-D array	--->No name
