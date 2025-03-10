@@ -1,0 +1,145 @@
+Advanced Indexing and Condition Based selection:
+---------------------------------------------------------------------------
+-->It will select required elements based on provided index or condition and with rhose elements a new 1-D array object will be created.
+-->The output is always a new 1-D array only.
+
+Ex:
+>>> a = np.arange(10,101,10)
+>>> a #array([ 10,  20,  30,  40,  50,  60,  70,  80,  90, 100])
+>>> b = a[[0,2,5]]
+>>> b #array([10, 30, 60])
+>>> a[0] = 333
+>>> a #array([333,  20,  30,  40,  50,  60,  70,  80,  90, 100])
+>>> b #array([10, 30, 60])
+>>> b[0]=999
+>>> b #array([999,  30,  60])
+>>> a #array([333,  20,  30,  40,  50,  60,  70,  80,  90, 100])
+
+Slicing vs Advanced Indexing
+--------------------------------------------
+Slicing:
+	-->The elements should be ordered.
+	-->We can't select arbitrary elements.
+	-->Conditional based selection is not possible.
+	-->Just we will get View but not copy.
+	-->Memory, performance-wise it is the best.
+
+Advanced Indexing:
+	-->The elements need not be ordered.
+	-->We can select arbitrary elements
+	-->Condition based selection is possible.
+	-->Just we will get separate copy but not view.
+	-->Memory, performance-wise not up to the mark
+
+Summary of syntaxes:
+---------------------------------
+Basic Indexing:
+-----------------------
+	1-D array: a[i]
+	2-D array: a[i][j] or a[i,j]
+	3-D array: a[i][j][k] or a[i,j,k]
+
+Slicing:
+-----------
+	1-D array: a[begin:end:step]
+	2-D array: a[begin:end:step,begin:end:step]
+	3-D array: a[begin:end:step,begin:end:step,begin:end:step]
+
+Advanced Indexing:
+-----------------------------
+	1-D array: a[x]-->x contains ndarray or list
+	2-D array: a[[row_indices],[column_indices]]
+	3-D array: a[[indices of 2D array],[row_indices],[column_indices]]
+
+Condition based selection:
+----------------------------------------
+	a[condition]==>a[a>0]
+	This is same for all 1-D,2-D and 3-D arrays
+
+How to iterate elements of the ndarray:
+-----------------------------------------------------------
+Iteration means getting all elements one-by-one
+
+3-ways:
+	1.By using python's loops
+	2.By using nditer() function
+	3.By using ndenumerate() function
+
+1.By using python's loops
+--------------------------------------
+To iterate elements of 1-D array
+-----------------------------------------------
+import numpy as np
+a = np.arange(10,51,10)
+for x in a:
+	print(x)
+
+To iterate elements of 2-D array
+-----------------------------------------------
+import numpy as np
+a = np.array([[10,20,30],[40,50,60],[70,80,90]])
+for x in a:#x is 1-D array but not scalar value
+	for y in x:#y is a scalar value present in 1-D array
+		print(y)
+
+To iterate elements of 3-D array
+------------------------------------------------
+import numpy as np
+a = np.array([[[10,20],[30,40]],[[50,60],[70,80]]])
+for x in a:#x is 2-D array but not scalar value
+	for y in x:#y is 1-D array but not scalar value
+		for z in y:#z is a scalar value
+			print(z)
+
+Note:To iterate elements of n-D array, we required n-loops.
+
+By using numpy's nditer()
+---------------------------------------
+Advantage: For any n-D array only one loop is enough.
+
+nditer is a class present in numpy module
+nditer()--->Creating an object of inditer class.
+
+1-D array:
+---------------
+import numpy as np
+a = np.arange(10,51,10)
+for x in np.nditer(a):
+	print(x)
+
+2-D array:
+---------------
+a = np.array([[10,20,30],[40,50,60],[70,80,90]])
+for x in np.nditer(a):
+	print(x)
+
+3-D array:
+---------------
+a = np.array([[[10,20],[30,40]],[[50,60],[70,80]]])
+for x in np.nditer(a):
+	print(x)
+
+Iterate elements of slicied array:
+------------------------------------------------
+import numpy as np
+a = np.array([[10,20,30],[40,50,60],[70,80,90]])
+for x in np.nditer(a[:,:2]):
+	print(x)
+
+Using nditer() to get elements of required data type:
+------------------------------------------------------------------------------
+We have to use op_dtypes
+>>>help(np.nditer)
+
+a = np.array([[10,20,30],[40,50,60],[70,80,90]])
+for x in np.nditer(a,flags=['buffered'],op_dtypes=['float']):
+	print(x)
+print(a)
+
+Noemal Python loops vs nditer():
+------------------------------------------------
+1.n-loops are required.
+1.Only one loop is enough.
+
+2.There is no way to specify our required dtype.
+2.There is a way to specify required dtype. For this we have to use op_dtypes argument.
